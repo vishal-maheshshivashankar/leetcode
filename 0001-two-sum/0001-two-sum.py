@@ -1,5 +1,12 @@
 class Solution:
     def twoSum(self, nums: List[int], target: int) -> List[int]:
-        for i in range(len(nums)):
-            if target - nums[i] in nums[i + 1 :]:
-                return [i, nums[i + 1 :].index(target - nums[i]) + i + 1]
+        seen: dict[int, int] = {}
+
+        for i, num in enumerate(nums):
+            need = target - num
+
+            if need in seen:
+                return seen[need], i
+            seen[num] = i
+
+        return []
